@@ -1,0 +1,109 @@
+<?php
+
+return [
+
+    'app_name' => env('APP_NAME', 'Laravel'),
+    'app_env' => env('APP_ENV', 'local'),
+    'app_debug' => env('APP_DEBUG', true),
+    'app_url' => env('APP_URL', 'http://127.0.0.1:8000'),
+    'app_locale' => env('APP_LOCALE', 'en'),
+    'app_fallback_locale' => env('APP_FALLBACK_LOCALE', 'en'),
+    'app_faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
+
+    'db' => [
+        'connection' => env('DB_CONNECTION', 'mysql'),
+        'host' => env('DB_HOST', '127.0.0.1'),
+        'port' => env('DB_PORT', '3306'),
+        'database' => env('DB_DATABASE', 'forge'),
+        'username' => env('DB_USERNAME', 'forge'),
+        'password' => env('DB_PASSWORD', ''),
+    ],
+
+    'mail' => [
+        'driver' => env('MAIL_MAILER', 'log'),
+        'host' => env('MAIL_HOST', '127.0.0.1'),
+        'port' => env('MAIL_PORT', 2525),
+        'from' => [
+            'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
+            'name' => env('MAIL_FROM_NAME', 'Laravel'),
+        ],
+        'encryption' => env('MAIL_ENCRYPTION', 'null'),
+        'username' => env('MAIL_USERNAME', null),
+        'password' => env('MAIL_PASSWORD', null),
+    ],
+
+    'cache' => [
+        'store' => env('CACHE_STORE', 'file'),
+        'prefix' => env('CACHE_PREFIX', 'laravel'),
+    ],
+
+    'session' => [
+        'driver' => env('SESSION_DRIVER', 'file'),
+        'lifetime' => env('SESSION_LIFETIME', 120),
+        'expire_on_close' => false,
+        'encrypt' => false,
+        'files' => storage_path('framework/sessions'),
+        'connection' => null,
+        'table' => 'sessions',
+        'store' => null,
+        'lottery' => [2, 100],
+        'cookie' => env('SESSION_COOKIE', 'laravel_session'),
+        'path' => '/',
+        'domain' => null,
+        'secure' => false,
+        'http_only' => true,
+        'same_site' => null,
+    ],
+
+    'queue' => [
+        'default' => env('QUEUE_CONNECTION', 'sync'),
+        'connections' => [
+            'sync' => [
+                'driver' => 'sync',
+            ],
+            'database' => [
+                'driver' => 'database',
+                'table' => 'jobs',
+                'queue' => 'default',
+                'retry_after' => 90,
+            ],
+        ],
+    ],
+
+    'broadcast' => [
+        'driver' => env('BROADCAST_CONNECTION', 'null'),
+    ],
+
+    'filesystems' => [
+        'default' => env('FILESYSTEM_DISK', 'local'),
+        'disks' => [
+            'local' => [
+                'driver' => 'local',
+                'root' => storage_path('app'),
+            ],
+            'public' => [
+                'driver' => 'local',
+                'root' => storage_path('app/public'),
+                'url' => env('APP_URL') . '/storage',
+                'visibility' => 'public',
+            ],
+        ],
+    ],
+
+    'services' => [
+        'google' => [
+            'client_id' => env('GOOGLE_CLIENT_ID'),
+            'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+            'redirect' => env('GOOGLE_REDIRECT'),
+        ],
+        'midtrans' => [
+            'server_key' => env('MIDTRANS_SERVER_KEY'),
+            'client_key' => env('VITE_MIDTRANS_CLIENT_KEY'),
+            'is_production' => env('MIDTRANS_IS_PRODUCTION', false),
+        ],
+        'xendit' => [
+            'secret_key' => env('XENDIT_SECRET_KEY'),
+        ],
+    ],
+
+];

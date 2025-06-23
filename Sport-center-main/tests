@@ -1,0 +1,14 @@
+// filepath: c:\xampp\htdocs\Sport-center-main1\Sport-center-main\tests\ExampleTest.php
+<?php
+
+namespace Tests;
+
+use PHPUnit\Framework\TestCase;
+
+class ExampleTest extends TestCase
+{
+    public function testBasicTest()
+    {
+        $this->assertTrue(true);
+    }
+}

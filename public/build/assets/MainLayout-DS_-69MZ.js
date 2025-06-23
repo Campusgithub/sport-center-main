@@ -1,0 +1,1 @@
+import{j as s}from"./app-CRDvNyL1.js";import{N as r,F as e}from"./Footer-C_GgISE5.js";const m=({children:a})=>s.jsxs("div",{className:"min-h-screen flex flex-col bg-gray-50",children:[s.jsx(r,{}),s.jsx("main",{className:"flex-1",children:a}),s.jsx(e,{})]});export{m as M};

@@ -1,0 +1,24 @@
+{
+  "name": "sport-center-main",
+  "version": "1.0.0",
+  "description": "A Laravel-based sports center management application.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npm run watch",
+    "watch": "mix watch",
+    "build": "npm run production",
+    "production": "mix --production"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "bootstrap": "^5.1.3",
+    "jquery": "^3.6.0",
+    "laravel-mix": "^6.0.6",
+    "vue": "^2.6.14"
+  },
+  "devDependencies": {
+    "sass": "^1.32.0",
+    "sass-loader": "^10.1.1"
+  },
+  "license": "MIT"
+}

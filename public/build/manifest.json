@@ -1,0 +1,109 @@
+{
+  "_Footer-C_GgISE5.js": {
+    "file": "assets/Footer-C_GgISE5.js",
+    "name": "Footer",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_MainLayout-DS_-69MZ.js": {
+    "file": "assets/MainLayout-DS_-69MZ.js",
+    "name": "MainLayout",
+    "imports": [
+      "resources/js/app.jsx",
+      "_Footer-C_GgISE5.js"
+    ]
+  },
+  "_VenueCard-CJk2-uer.js": {
+    "file": "assets/VenueCard-CJk2-uer.js",
+    "name": "VenueCard",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_index-zJx878tr.js": {
+    "file": "assets/index-zJx878tr.js",
+    "name": "index",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-D0y5C3tF.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/app.jsx": {
+    "file": "assets/app-CRDvNyL1.js",
+    "name": "app",
+    "src": "resources/js/app.jsx",
+    "isEntry": true,
+    "dynamicImports": [
+      "resources/js/pages/Booking.jsx",
+      "resources/js/pages/Contact.jsx",
+      "resources/js/pages/Home.jsx",
+      "resources/js/pages/Venue.jsx",
+      "resources/js/pages/VenueDetail.jsx"
+    ],
+    "css": [
+      "assets/app-D0y5C3tF.css"
+    ]
+  },
+  "resources/js/pages/Booking.jsx": {
+    "file": "assets/Booking-Dv6M_NRo.js",
+    "name": "Booking",
+    "src": "resources/js/pages/Booking.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_index-zJx878tr.js",
+      "_MainLayout-DS_-69MZ.js",
+      "_Footer-C_GgISE5.js"
+    ]
+  },
+  "resources/js/pages/Contact.jsx": {
+    "file": "assets/Contact-Bh_SSlIl.js",
+    "name": "Contact",
+    "src": "resources/js/pages/Contact.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_Footer-C_GgISE5.js"
+    ]
+  },
+  "resources/js/pages/Home.jsx": {
+    "file": "assets/Home-Cwsx8rqX.js",
+    "name": "Home",
+    "src": "resources/js/pages/Home.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_MainLayout-DS_-69MZ.js",
+      "_VenueCard-CJk2-uer.js",
+      "_Footer-C_GgISE5.js"
+    ]
+  },
+  "resources/js/pages/Venue.jsx": {
+    "file": "assets/Venue-BMa9xNtT.js",
+    "name": "Venue",
+    "src": "resources/js/pages/Venue.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_index-zJx878tr.js",
+      "_MainLayout-DS_-69MZ.js",
+      "_VenueCard-CJk2-uer.js",
+      "_Footer-C_GgISE5.js"
+    ]
+  },
+  "resources/js/pages/VenueDetail.jsx": {
+    "file": "assets/VenueDetail-kIO3Jewy.js",
+    "name": "VenueDetail",
+    "src": "resources/js/pages/VenueDetail.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_index-zJx878tr.js"
+    ]
+  }
+}
