@@ -16,4 +16,13 @@ class ListVenues extends ListRecords
             Actions\CreateAction::make(),
         ];
     }
+
+    public function mount(): void
+    {
+        parent::mount();
+
+        if (request()->query('created') === '1') {
+            $this->dispatch('swal:success', message: 'Venue berhasil dibuat!');
+        }
+    }
 }

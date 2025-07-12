@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Payment extends Model
 {
@@ -13,7 +14,7 @@ class Payment extends Model
         'transaction_id',
         'payment_code',
         'payment_type',
-        'status',
+        'amount',
         'CompanyCode',
         'Status',
         'isDeleted',
@@ -32,6 +33,6 @@ class Payment extends Model
 
     public function transaction(): BelongsTo
     {
-        return $this->belongsTo(Transaction::class);
+        return $this->belongsTo(Transaction::class, 'transaction_id');
     }
 } 

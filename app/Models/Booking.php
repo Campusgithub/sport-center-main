@@ -18,13 +18,23 @@ class Booking extends Model
         'price'
     ];
 
+    // Tambahkan enum untuk status
+    const STATUS = [
+        'PENDING' => 1,
+        'VERIFIED' => 2,
+        'TICKET_SENT' => 3,
+        'IN_PROGRESS' => 4,
+        'COMPLETED' => 5
+    ];
+
+    // Relasi dengan model lain
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
     public function venue()
     {
         return $this->belongsTo(Venue::class);
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
     }
 } 

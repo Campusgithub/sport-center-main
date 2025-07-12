@@ -3,6 +3,11 @@ import { Inertia } from '@inertiajs/inertia';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
+// Helper function untuk format Rupiah yang konsisten
+const formatRupiah = (amount) => {
+  return `Rp ${Number(amount).toLocaleString('id-ID')}`;
+};
+
 export default function PopupVenueDetail({ venue, onClose }) {
   const [step, setStep] = useState(1);
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
@@ -11,6 +16,7 @@ export default function PopupVenueDetail({ venue, onClose }) {
   const [paymentMethod, setPaymentMethod] = useState('');
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [bookedSlots, setBookedSlots] = useState([]);
 
   const timeSlots = [
     '07:00-08:00', '08:00-09:00', '09:00-10:00', '10:00-11:00',
@@ -28,6 +34,24 @@ export default function PopupVenueDetail({ venue, onClose }) {
     document.body.appendChild(script);
     return () => document.body.removeChild(script);
   }, []);
+
+  useEffect(() => {
+    if (!venue?.id || !selectedDate) return;
+    
+    console.log('Fetching booked times for:', { venue_id: venue.id, date: selectedDate });
+    
+    axios
+      .get(`/api/booked-times?venue_id=${venue.id}&date=${selectedDate}`)
+      .then(res => {
+        console.log('API Response:', res.data);
+        console.log('Booked Times Array:', res.data.bookedTimes);
+        setBookedSlots(res.data.bookedTimes || []);
+      })
+      .catch(err => {
+        console.error('Error fetching booked times:', err);
+        setBookedSlots([]);
+      });
+  }, [venue?.id, selectedDate]);
 
   const toggleTimeSlot = (time) => {
     setSelectedTimes((prev) =>
@@ -139,7 +163,7 @@ export default function PopupVenueDetail({ venue, onClose }) {
             />
             <h2 className="text-2xl font-bold mb-2">{venue.name}</h2>
             <p className="text-gray-600 mb-1">Lokasi: {venue.location}</p>
-            <p className="text-gray-600 mb-1">Harga: Rp. {venue.price?.toLocaleString('id-ID')} / jam</p>
+            <p className="text-gray-600 mb-1">Harga: {formatRupiah(venue.price)} / jam</p>
             <p className="text-gray-600 mb-1">Tipe: {venue.type}</p>
             {venue.facilities && venue.facilities.length > 0 && (
               <p className="text-gray-600 mb-4">
@@ -161,23 +185,35 @@ export default function PopupVenueDetail({ venue, onClose }) {
 
             <label className="block mb-2 font-semibold">Pilih Jam</label>
             <div className="grid grid-cols-4 gap-2 mb-4">
-              {timeSlots.map((time) => (
-                <button
-                  key={time}
-                  onClick={() => toggleTimeSlot(time)}
-                  className={`py-1 text-sm rounded ${
-                    selectedTimes.includes(time)
-                      ? 'bg-green-500 text-white'
-                      : 'bg-gray-200 hover:bg-gray-300'
-                  }`}
-                >
-                  {time}
-                </button>
-              ))}
+              {timeSlots.map((time) => {
+                const start = time.split('-')[0]; // Ambil jam mulai (misal: '07:00')
+                const isBooked = bookedSlots.includes(start);
+                
+                // Debug log untuk setiap slot
+                console.log(`Time slot ${time} - Start: ${start} - Booked: ${isBooked} - BookedSlots:`, bookedSlots);
+                
+                return (
+                  <button
+                    key={time}
+                    onClick={() => !isBooked && toggleTimeSlot(time)}
+                    disabled={isBooked}
+                    className={`py-1 text-sm rounded transition-colors ${
+                      isBooked
+                        ? 'bg-red-500 text-white cursor-not-allowed'
+                        : selectedTimes.includes(time)
+                          ? 'bg-green-500 text-white'
+                          : 'bg-gray-200 hover:bg-gray-300'
+                    }`}
+                  >
+                    {time}
+                    {isBooked && ' (Booked)'}
+                  </button>
+                );
+              })}
             </div>
 
             <div className="flex justify-between mt-6">
-              <span className="font-semibold">Total: Rp. {calculateTotal().toLocaleString('id-ID')}</span>
+              <span className="font-semibold">Total: {formatRupiah(calculateTotal())}</span>
               <button
                 onClick={() => selectedTimes.length > 0 && setStep(2)}
                 className={`px-4 py-2 rounded ${
@@ -202,7 +238,7 @@ export default function PopupVenueDetail({ venue, onClose }) {
               <DetailRow label="Lapangan" value={venue.name} />
               <DetailRow label="Tanggal" value={selectedDate} />
               <DetailRow label="Jam" value={selectedTimes.join(', ')} />
-              <DetailRow label="Total Harga" value={`Rp. ${calculateTotal().toLocaleString('id-ID')}`} />
+              <DetailRow label="Total Harga" value={formatRupiah(calculateTotal())} />
             </div>
 
             <div className="space-y-4">

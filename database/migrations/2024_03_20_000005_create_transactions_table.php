@@ -10,6 +10,7 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+            $table->string('order_id', 100)->unique()->nullable();
             $table->foreignId('customer_id')->constrained();
             $table->foreignId('venue_id')->constrained();
             $table->dateTime('start_time');
@@ -25,6 +26,7 @@ return new class extends Migration
             $table->dateTime('CreatedDate');
             $table->string('LastUpdatedBy', 32)->nullable();
             $table->dateTime('LastUpdatedDate')->nullable();
+            $table->enum('approval_status', ['pending', 'approved', 'rejected'])->default('pending');
         });
     }
 

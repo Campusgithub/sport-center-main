@@ -67,28 +67,27 @@ export default function Home() {
       </section>
 
       {/* Rekomendasi */}
-     <section className="p-6 mt-10">
-  <div className="grid grid-cols-1 md:grid-cols-3 items-center mb-6">
-    <div></div>
-    <h2 className="text-xl font-bold text-center">Rekomendasi Lapangan</h2>
-    <div className="text-right">
-      <Link href="/venue" className="text-sm text-blue-600 hover:underline">
-        Lihat Semua
-      </Link>
-    </div>
-  </div>
+      <section className="p-6 mt-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 items-center mb-6">
+          <div></div>
+          <h2 className="text-xl font-bold text-center">Rekomendasi Lapangan</h2>
+          <div className="text-right">
+            <Link href="/venue" className="text-sm text-blue-600 hover:underline">
+              Lihat Semua
+            </Link>
+          </div>
+        </div>
 
-  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-    {filteredVenues.length > 0 ? (
-      filteredVenues.map((venue) => (
-        <VenueCard key={venue.id} venue={venue} />
-      ))
-    ) : (
-      <p className="text-gray-500 col-span-full text-center">Lapangan tidak ditemukan.</p>
-    )}
-  </div>
-</section>
-
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+          {filteredVenues.length > 0 ? (
+            filteredVenues.map((venue) => (
+              <VenueCard key={venue.id} venue={venue} />
+            ))
+          ) : (
+            <p className="text-gray-500 col-span-full text-center">Lapangan tidak ditemukan.</p>
+          )}
+        </div>
+      </section>
     </MainLayout>
   );
 }

@@ -3,14 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Transaction extends Model
 {
-    public $timestamps = false;
-    
     protected $fillable = [
+        'order_id',
         'customer_id',
         'venue_id',
         'start_time',
@@ -25,31 +22,76 @@ class Transaction extends Model
         'CreatedBy',
         'CreatedDate',
         'LastUpdatedBy',
-        'LastUpdatedDate'
+        'LastUpdatedDate',
+        'updated_at', // Tambahkan kolom baru
+        'approval_status',
     ];
 
+    //protected $dates = ['start_time', 'end_time'];
     protected $casts = [
         'start_time' => 'datetime',
         'end_time' => 'datetime',
-        'is_ticket_sent' => 'integer',
-        'Status' => 'integer',
-        'isDeleted' => 'integer',
-        'CreatedDate' => 'datetime',
-        'LastUpdatedDate' => 'datetime'
     ];
+    
+    // Nonaktifkan timestamps default Laravel jika tidak diperlukan
+    public $timestamps = false;
 
-    public function customer(): BelongsTo
+    // Relasi dengan Customer
+    public function customer()
     {
-        return $this->belongsTo(Customer::class);
+        return $this->belongsTo(Customer::class, 'customer_id');
     }
 
-    public function venue(): BelongsTo
+    // Relasi dengan Venue
+    public function venue()
     {
-        return $this->belongsTo(Venue::class);
+        return $this->belongsTo(Venue::class, 'venue_id');
     }
 
-    public function payment(): HasOne
+    // Relasi dengan Transaction Slots (jika ada)
+    public function slots()
     {
-        return $this->hasOne(Payment::class);
+        return $this->hasMany(TransactionSlot::class);
     }
-} 
+
+    // Method baru untuk tracking booking (tambahkan di sini)
+    public function getBookingTrackingDetails()
+    {
+        // Mapping status booking
+        $statusMapping = [
+            'pending' => [
+                'code' => 1, 
+                'label' => 'Menunggu Pembayaran',
+                'color' => 'yellow'
+            ],
+            'paid' => [
+                'code' => 2, 
+                'label' => 'Lunas',
+                'color' => 'green'
+            ],
+            'completed' => [
+                'code' => 3, 
+                'label' => 'Selesai',
+                'color' => 'blue'
+            ]
+        ];
+
+        // Ambil status mapping
+        $status = $statusMapping[$this->status_transaksi] ?? [
+            'code' => 0, 
+            'label' => 'Status Tidak Dikenal',
+            'color' => 'gray'
+        ];
+
+        return [
+            'ticket_code' => $this->ticket_code,
+            'customer_name' => $this->customer->name,
+            'venue_name' => $this->venue->name,
+            'booking_date' => $this->start_time->format('d F Y'),
+            'booking_time' => $this->start_time->format('H:i') . ' - ' . $this->end_time->format('H:i'),
+            'status_code' => $status['code'],
+            'status_label' => $status['label'],
+            'total_price' => $this->amount
+        ];
+    }
+}

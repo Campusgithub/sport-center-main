@@ -1,7 +1,7 @@
 import React from 'react';
 
 function formatRupiah(price) {
-  return `Rp ${Number(price).toLocaleString('id-ID')},-`;
+  return `Rp ${Number(price).toLocaleString('id-ID')}`;
 }
 
 export default function VenueCard({ venue, onClick }) {

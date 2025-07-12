@@ -8,7 +8,7 @@ import PopupVenueDetail from '@/components/PopupVenueDetail';
 import Swal from 'sweetalert2';
 
 export default function Venue() {
-  const { venues } = usePage().props;
+  const { venues = [] } = usePage().props;
   const [search, setSearch] = useState('');
   const [selectedVenue, setSelectedVenue] = useState(null);
 
@@ -37,6 +37,8 @@ export default function Venue() {
         showConfirmButton: false,
         timer: 1500
       });
+      // Hapus query agar alert tidak muncul lagi saat reload
+      window.history.replaceState({}, document.title, "/venue");
     }
   }, []);
 
@@ -78,4 +80,4 @@ export default function Venue() {
       )}
     </MainLayout>
   );
-}
+};

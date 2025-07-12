@@ -18,4 +18,13 @@ export default defineConfig({
             '/get-snap-token': 'http://localhost:8000',
         }
     },
+    // =======================================================
+    // Tambahkan bagian 'define' ini
+    // =======================================================
+    define: {
+        // Ini akan membuat process.env.VITE_API_BASE_URL tersedia di frontend
+        // Nilainya diambil dari APP_URL di .env Laravel Anda, ditambah '/api'
+        'process.env.VITE_API_BASE_URL': JSON.stringify(process.env.APP_URL ? process.env.APP_URL + '/api' : 'http://127.0.0.1:8000/api'),
+    },
+    // =======================================================
 });

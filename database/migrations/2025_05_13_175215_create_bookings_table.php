@@ -13,13 +13,18 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('venue_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('venue_id');
+            $table->unsignedBigInteger('user_id')->nullable(); // Opsional untuk booking tanpa login
             $table->date('date');
             $table->string('time');
-            $table->enum('status', ['pending', 'confirmed', 'completed'])->default('pending');
+            $table->integer('status')->default(1);
             $table->decimal('price', 10, 2);
+            $table->string('customer_name')->nullable(); // Tambahkan nama customer
+            $table->string('customer_phone')->nullable(); // Tambahkan nomor telepon
             $table->timestamps();
+
+            $table->foreign('venue_id')->references('id')->on('venues')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
         });
     }
 

@@ -1,0 +1,17 @@
+{
+    "filament-actions::cancel": "Batal",
+    "filament-actions::confirm": "Konfirmasi",
+    "filament-actions::submit": "Kirim",
+    "filament-actions::modal.heading": "Konfirmasi Tindakan",
+    "filament-actions::modal.subheading": "Apakah Anda yakin ingin melakukan ini?",
+    "filament-actions::modal.actions.confirm.label": "Ya, Lanjut",
+  
+    "filament-notifications::title": "Notifikasi",
+    "filament-notifications::success": "Berhasil",
+    "filament-notifications::danger": "Gagal",
+  
+    "filament-tables::columns.actions": "Aksi",
+    "filament-tables::filters": "Filter",
+    "filament-tables::search.placeholder": "Cari data..."
+  }
+  

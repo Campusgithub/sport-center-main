@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities; 
+
+.time-slot.unavailable {
+    background-color: #ff000033;
+    color: #888;
+    cursor: not-allowed;
+    text-decoration: line-through;
+}
+
+.time-slot.unavailable:hover {
+    background-color: #ff000044;
+} 
